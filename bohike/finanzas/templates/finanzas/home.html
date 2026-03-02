@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<div class="layout">
+
+    <!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+
+    <div class="top">
+        <span class="logo-text">
+            <i class="fa-solid fa-wallet"></i>
+            Bohike
+        </span>
+        <button class="toggle-btn" onclick="toggleSidebar()">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </div>
+
+    <a href="{% url 'home' %}" class="active">
+        <i class="fa-solid fa-chart-line"></i>
+        <span class="text">Dashboard</span>
+    </a>
+
+    <a href="{% url 'agregar' %}">
+        <i class="fa-solid fa-plus-circle"></i>
+        <span class="text">Agregar</span>
+    </a>
+
+    <!-- Aún no existen estas rutas -->
+    <a href="#">
+        <i class="fa-solid fa-chart-pie"></i>
+        <span class="text">Reportes</span>
+    </a>
+
+    <a href="{% url 'categorias' %}">
+        <i class="fa-solid fa-tags"></i>
+        <span class="text">Categorías</span>
+    </a>
+
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button class="logout-btn">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span class="text">Salir</span>
+        </button>
+    </form>
+
+</div>
+
+    <!-- MAIN -->
+    <div class="main" id="main">
+
+        <h1>Dashboard</h1>
+        <p class="subtitle">Bienvenido {{ request.user.username }}</p>
+
+        <div class="balance-card">
+            <h3>Balance Total</h3>
+            <h1>$ {{ balance }}</h1>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <h4>Ingresos del Mes</h4>
+                <p class="ingresos">$ {{ ingresos }}</p>
+            </div>
+
+            <div class="stat-card">
+                <h4>Gastos del Mes</h4>
+                <p class="gastos">$ {{ gastos }}</p>
+            </div>
+        </div>
+
+        <div class="movimientos">
+            <h3>Movimientos Recientes</h3>
+
+            {% for mov in movimientos %}
+            <div class="movimiento">
+                <div>
+                    <strong>{{ mov.descripcion }}</strong><br>
+                    <small>{{ mov.fecha }}</small>
+                </div>
+
+                <div class="lado-derecho">
+                    {% if mov.tipo == "ingreso" %}
+                        <span class="monto-verde">+ ${{ mov.monto }}</span>
+                    {% else %}
+                        <span class="monto-rojo">- ${{ mov.monto }}</span>
+                    {% endif %}
+
+                    <form method="post" action="{% url 'eliminar' mov.id %}">
+                        {% csrf_token %}
+                        <button class="delete-btn">🗑</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+<script>
+function toggleSidebar() {
+    document.getElementById("sidebar").classList.toggle("collapsed");
+}
+</script>
+
+</body>
+</html>

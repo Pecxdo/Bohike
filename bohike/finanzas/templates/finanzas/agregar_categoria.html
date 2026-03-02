@@ -1,0 +1,7 @@
+<h2>Nueva Categoría</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="nombre" placeholder="Nombre categoría">
+    <button>Guardar</button>
+</form>

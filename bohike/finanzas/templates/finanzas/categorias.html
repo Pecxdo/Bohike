@@ -1,0 +1,15 @@
+<h2>Categorías</h2>
+
+<a href="{% url 'agregar_categoria' %}">Nueva Categoría</a>
+
+{% for cat in categorias %}
+    <div class="card">
+        <p>{{ cat.nombre }}</p>
+
+        <a href="{% url 'eliminar_categoria' cat.id %}">
+            Eliminar
+        </a>
+    </div>
+{% empty %}
+    <p>No tienes categorías aún.</p>
+{% endfor %}
