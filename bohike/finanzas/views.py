@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Categoria
 from django.shortcuts import get_object_or_404, redirect
-from .models import Movimiento
+from .models import Movimiento, Categoria
 
 def register(request):
     if request.method == "POST":
@@ -43,24 +43,34 @@ def home(request):
 
 
 
+
+
+
 @login_required
 def agregar_movimiento(request):
+
     if request.method == "POST":
         tipo = request.POST.get("tipo")
-        monto = request.POST.get("monto")
         descripcion = request.POST.get("descripcion")
+        monto = request.POST.get("monto")
+        categoria_id = request.POST.get("categoria")
 
         Movimiento.objects.create(
             usuario=request.user,
             tipo=tipo,
+            descripcion=descripcion,
             monto=monto,
-            descripcion=descripcion
+            categoria_id=categoria_id if categoria_id else None
         )
 
         return redirect("home")
 
-    return render(request, "finanzas/agregar.html")
+    categorias = Categoria.objects.filter(usuario=request.user)
 
+    return render(request, "finanzas/agregar.html", {
+        "categorias": categorias
+    })
+   
 @login_required
 def eliminar_movimiento(request, id):
     movimiento = Movimiento.objects.get(id=id, usuario=request.user)

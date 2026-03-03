@@ -1,0 +1,62 @@
+/* SOLO ESTILOS INTERNOS DE AGREGAR */
+
+.main {
+    padding: 60px;
+}
+
+.subtitle {
+    color: #aaa;
+    margin-bottom: 25px;
+}
+
+.form-card {
+    background: #121212;
+    padding: 22px;
+    border-radius: 12px;
+    border: 1px solid #1f1f1f;
+    margin-top: 25px;
+    width: 100%;
+    max-width: 900px;
+}
+
+/* Formulario específico */
+.form-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-card label {
+    font-size: 14px;
+    color: #aaa;
+}
+
+.form-card input,
+.form-card select {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #1f1f1f;
+    background: #0f0f0f;
+    color: white;
+}
+
+.form-card input:focus,
+.form-card select:focus {
+    outline: none;
+    border-color: #00ff88;
+}
+
+/* BOTÓN SOLO DENTRO DEL FORM */
+.form-card button {
+    background: #00ff88;
+    color: black;
+    padding: 12px 22px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.form-card button:hover {
+    background: #00cc6a;
+}

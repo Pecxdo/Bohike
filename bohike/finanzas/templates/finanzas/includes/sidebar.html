@@ -1,0 +1,28 @@
+
+
+<div class="sidebar" id="sidebar">
+
+    <div class="top">
+        <span class="logo-text">💵 Bohike</span>
+        <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    </div>
+
+    <a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}">
+        <i class="fa-solid fa-chart-line"></i>
+        <span class="text">Dashboard</span>
+    </a>
+
+    <a href="{% url 'agregar' %}" class="{% if 'agregar' in request.path %}active{% endif %}">
+        <i class="fa-solid fa-plus"></i>
+        <span class="text">Agregar</span>
+    </a>
+
+    <a href="{% url 'categorias' %}" class="{% if 'categorias' in request.path %}active{% endif %}">
+        <i class="fa-solid fa-tags"></i>
+        <span class="text">Categorías</span>
+    </a>
+
+    
+    </form>
+
+</div>

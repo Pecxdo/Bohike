@@ -5,99 +5,14 @@ body {
     color: white;
 }
 
-/* Layout */
-.layout {
-    display: flex;
-    min-height: 100vh;
-}
 
-/* SIDEBAR */
-.sidebar {
-    width: 230px;
-    background: #111;
-    padding: 20px;
-    transition: width 0.3s ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.sidebar.collapsed {
-    width: 70px;
-}
-
-.top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
-.logo-text {
-    color: #00ff88;
-    font-weight: bold;
-}
-
-.toggle-btn {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-/* Links */
-.sidebar a {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: #aaa;
-    text-decoration: none;
-    padding: 10px 0;
-    transition: 0.2s;
-}
-
-.sidebar a:hover,
-.sidebar a.active {
-    color: #00ff88;
-}
-
-/* Hide text when collapsed */
-.sidebar.collapsed .text {
-    display: none;
-}
-
-.sidebar.collapsed .logo-text {
-    display: none;
-}
-
-/* Logout */
-.logout-btn {
-    margin-top: auto;
-    background: none;
-    border: none;
-    color: #aaa;
-    display: flex;
-    gap: 10px;
-    cursor: pointer;
-}
-
-.logout-btn:hover {
-    color: #ff4d4d;
-}
-
-/* MAIN */
-.main {
-    flex: 1;
-    padding: 40px;
-    transition: 0.3s;
-}
 
 .subtitle {
     color: #aaa;
     margin-bottom: 30px;
 }
 
-/* Balance */
+/* BALANCE CARD */
 .balance-card {
     background: linear-gradient(135deg, #00c853, #009624);
     padding: 30px;
@@ -105,7 +20,17 @@ body {
     margin-bottom: 30px;
 }
 
-/* Stats */
+.balance-card h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.balance-card h1 {
+    margin: 10px 0 0 0;
+    font-size: 32px;
+}
+
+/* STATS */
 .stats {
     display: flex;
     gap: 20px;
@@ -114,9 +39,10 @@ body {
 
 .stat-card {
     flex: 1;
-    background: #1c1c1c;
+    background: #121212;
     padding: 20px;
     border-radius: 12px;
+    border: 1px solid #1f1f1f;
 }
 
 .ingresos {
@@ -129,18 +55,23 @@ body {
     font-weight: bold;
 }
 
-/* Movimientos */
+/* MOVIMIENTOS */
 .movimientos {
     background: #121212;
     padding: 20px;
     border-radius: 12px;
+    border: 1px solid #1f1f1f;
 }
 
 .movimiento {
     display: flex;
     justify-content: space-between;
     padding: 15px 0;
-    border-bottom: 1px solid #222;
+    border-bottom: 1px solid #1f1f1f;
+}
+
+.movimiento:last-child {
+    border-bottom: none;
 }
 
 .monto-verde {
@@ -167,17 +98,5 @@ body {
 }
 
 .delete-btn:hover {
-    color: red;
-}
-
-.sidebar i {
-    width: 20px;
-    text-align: center;
-}
-
-.sidebar a,
-.logout-btn {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    color: #ff4d4d;
 }

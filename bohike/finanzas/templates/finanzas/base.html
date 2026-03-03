@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bohike</title>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    <!-- CSS GLOBAL (sidebar + layout + avatar flotante) -->
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+
+    <!-- CSS específico por página -->
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+    <!-- AVATAR FLOTANTE -->
+    {% if request.user.is_authenticated %}
+    <div class="floating-user">
+        <div class="user-dropdown">
+
+            <div class="user-trigger" onclick="toggleUserMenu(event)">
+                <div class="avatar">
+                    {{ request.user.username|first|upper }}
+                </div>
+            </div>
+
+            <div class="user-menu" id="userMenu">
+                <div class="user-info">
+                    {{ request.user.username }}
+                </div>
+
+                <div class="divider"></div>
+
+                <a href="#">⚙ Configuración</a>
+                <a href="{% url 'categorias' %}">🏷 Categorías</a>
+
+                <div class="divider"></div>
+
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-option">
+                        🚪 Cerrar sesión
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- LAYOUT PRINCIPAL -->
+    <div class="layout">
+
+        <!-- SIDEBAR -->
+        {% include 'finanzas/includes/sidebar.html' %}
+
+        <!-- CONTENIDO -->
+        <div class="main">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+    </div>
+
+    <!-- JS GLOBAL -->
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById("sidebar");
+            if (sidebar) {
+                sidebar.classList.toggle("collapsed");
+            }
+        }
+
+        function toggleUserMenu(event) {
+            event.stopPropagation();
+            const menu = document.getElementById("userMenu");
+            if (menu) {
+                menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+            }
+        }
+
+        document.addEventListener("click", function(event) {
+            const dropdown = document.querySelector(".user-dropdown");
+            const menu = document.getElementById("userMenu");
+
+            if (dropdown && menu && !dropdown.contains(event.target)) {
+                menu.style.display = "none";
+            }
+        });
+    </script>
+
+</body>
+</html>
